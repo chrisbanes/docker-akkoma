@@ -3,48 +3,41 @@ version: '3.8'
 services:
   db:
     image: postgres:12.1-alpine
-    container_name: pleroma_db
+    container_name: akkoma_db
     restart: always
     healthcheck:
       test: ["CMD", "pg_isready", "-U", "pleroma"]
-    environment:
-      POSTGRES_USER: pleroma
-      POSTGRES_PASSWORD: ChangeMe!
-      POSTGRES_DB: pleroma
+    env_file: db.env
     volumes:
       - ./postgres:/var/lib/postgresql/data
 
   web:
-    image: pleroma
-    container_name: pleroma_web
+    image: akkoma
+    container_name: akkoma_web
     healthcheck:
-      test:
-        [
-          "CMD-SHELL",
-          "wget -q --spider --proxy=off localhost:4000 || exit 1",
-        ]
+      test: [ "CMD-SHELL", "wget -q --spider --proxy=off localhost:4000 || exit 1" ]
     restart: always
     ports:
+      # Remove this if you're not exposing this to your local network
       - '4000:4000'
     build:
-      context: .
+      context: build
       # Feel free to remove or override this section
       # See 'Build-time variables' in README.md
       args:
         - "UID=1000"
         - "GID=1000"
-        - "PLEROMA_VER=v2.4.2"
+        - "AKKOMA_VER=v3.4.0"
     volumes:
       - ./uploads:/var/lib/pleroma/uploads
       - ./static:/var/lib/pleroma/static
-      - ./config.exs:/etc/pleroma/config.exs:ro
+      - ./secret.exs:/var/lib/akkoma/secret.exs
+      - ./config.exs:/var/lib/akkoma/config.exs:ro # Optional configuration file
+    env_file: db.env
     environment:
       DOMAIN: example.com
-      INSTANCE_NAME: Pleroma
+      INSTANCE_NAME: Akkoma
       ADMIN_EMAIL: admin@example.com
       NOTIFY_EMAIL: notify@example.com
-      DB_USER: pleroma
-      DB_PASS: ChangeMe!
-      DB_NAME: pleroma
     depends_on:
       - db
