@@ -22,10 +22,10 @@ RUN addgroup -g $GID $UNAME \
 
 RUN apk add git gcc g++ musl-dev make cmake file-dev exiftool ffmpeg imagemagick libmagic ncurses postgresql-client
 
-ARG DATA=/var/lib/akkoma
-RUN mkdir -p ${DATA}/uploads \
-    && mkdir -p ${DATA}/static \
-    && chown -R $UNAME ${DATA}
+RUN mkdir -p /uploads && chown -R $UNAME /uploads \
+    && mkdir -p /static && chown -R $UNAME /static \
+    && mkdir -p /config && chown -R $UNAME /config
+&& mkdir -p /static && chown -R $UNAME /static
 
 USER $UNAME
 WORKDIR /akkoma
@@ -37,8 +37,7 @@ RUN echo "import Mix.Config" > config/prod.secret.exs \
     && mix local.hex --force \
     && mix local.rebar --force \
     && mix deps.get --only prod \
-    && mkdir release \
-    && mix release --path /akkoma
+    && mix compile
 
 COPY ./config.exs /akkoma/config/prod.exs
 
