@@ -25,7 +25,6 @@ RUN apk add git gcc g++ musl-dev make cmake file-dev exiftool ffmpeg imagemagick
 RUN mkdir -p /uploads && chown -R $UNAME /uploads \
     && mkdir -p /static && chown -R $UNAME /static \
     && mkdir -p /config && chown -R $UNAME /config
-&& mkdir -p /static && chown -R $UNAME /static
 
 USER $UNAME
 WORKDIR /akkoma
