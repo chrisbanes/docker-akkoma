@@ -29,11 +29,11 @@ services:
         - "GID=1000"
         - "AKKOMA_VER=v3.4.0"
     volumes:
-      - ./uploads:/var/lib/pleroma/uploads
-      - ./static:/var/lib/pleroma/static
-      - ./secret.exs:/var/lib/akkoma/secret.exs
-      - ./config.exs:/var/lib/akkoma/config.exs:ro # Optional configuration file
-    env_file: db.env
+      - ./uploads:/uploads
+      - ./static:/static
+      - ./config:/config
+    env_file: 
+      - db.env
     environment:
       DOMAIN: example.com
       INSTANCE_NAME: Akkoma
