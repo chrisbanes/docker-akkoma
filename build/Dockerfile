@@ -37,6 +37,8 @@ RUN echo "import Mix.Config" > config/prod.secret.exs \
     && mix local.rebar --force \
     && mix deps.get --only prod \
     && mix compile
+# Need to investigate using mix release to avoid needing to recompile
+# on startup. It breaks Akkoma currently from a quick test.
 
 COPY ./config.exs /akkoma/config/prod.exs
 
