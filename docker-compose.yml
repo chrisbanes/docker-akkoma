@@ -6,7 +6,7 @@ services:
     container_name: akkoma_db
     restart: always
     healthcheck:
-      test: ["CMD", "pg_isready", "-U", "pleroma"]
+      test: [ "CMD", "pg_isready", "-q", "-d", "${POSTGRES_DB}", "-U", "${POSTGRES_USER}" ]
     env_file: db.env
     volumes:
       - ./postgres:/var/lib/postgresql/data
@@ -22,11 +22,11 @@ services:
       - '4000:4000'
     build:
       context: build
-      # Feel free to remove or override this section
-      # See 'Build-time variables' in README.md
+      # Feel free to remove or override this section. The variables set below are
+      # the current defaults. See 'Build-time variables' in README.md
       args:
-        - "UID=1000"
-        - "GID=1000"
+        - "UID=911" 
+        - "GID=911"
         - "AKKOMA_VER=v3.4.0"
     volumes:
       - ./uploads:/uploads
