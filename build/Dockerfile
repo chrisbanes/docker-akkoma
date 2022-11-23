@@ -18,7 +18,7 @@ LABEL org.opencontainers.image.title="akkoma" \
 ARG HOME=/akkoma
 
 RUN addgroup -g $GID $UNAME \
-    && adduser -h $HOME -s /bin/false -D -G $UNAME -u $UID $UNAME
+    && adduser -h $HOME -D -G $UNAME -u $UID $UNAME
 
 RUN apk add git gcc g++ musl-dev make cmake file-dev exiftool ffmpeg imagemagick libmagic ncurses postgresql-client
 
