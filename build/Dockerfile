@@ -22,11 +22,11 @@ RUN addgroup -g $GID $UNAME \
 
 RUN apk add git gcc g++ musl-dev make cmake file-dev exiftool ffmpeg imagemagick libmagic ncurses postgresql-client
 
-USER $UNAME
-
 RUN mkdir -p /uploads && chown -R $UNAME /uploads \
     && mkdir -p /static && chown -R $UNAME /static \
     && mkdir -p /config && chown -R $UNAME /config
+
+USER $UNAME
 
 WORKDIR /akkoma
 
