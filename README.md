@@ -2,9 +2,9 @@
 
 [Akkoma](https://akkoma.social/) is a federated social networking platform, compatible with GNU social and other OStatus implementations. It is free software licensed under the AGPLv3.
 
-It actually consists of two components: a backend, named simply Akkoma, and various frontends which can be installed.
+It actually consists of two components: a backend, named simply Akkoma, and various frontends which can be installed. It's main advantages are its lightness and speed.
 
-Its main advantages are its lightness and speed.
+This setup is heavily based on https://github.com/angristan/docker-pleroma, which tweaks and changes needed to use Akkoma instead.
 
 ## Features
 
