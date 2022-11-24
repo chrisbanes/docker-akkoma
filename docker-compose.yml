@@ -25,8 +25,8 @@ services:
       # Feel free to remove or override this section. The variables set below are
       # the current defaults. See 'Build-time variables' in README.md
       args:
-        - "UID=911"
-        - "GID=911"
+        - "UID=1000"
+        - "GID=1000"
         - "AKKOMA_VER=v3.4.0"
     volumes:
       - ./uploads:/uploads
