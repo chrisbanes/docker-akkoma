@@ -1,4 +1,4 @@
-FROM elixir:1.13.4-alpine
+FROM elixir:1.15.7-alpine
 
 ARG AKKOMA_VER=stable
 ARG UNAME=akkoma

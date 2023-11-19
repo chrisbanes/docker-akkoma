@@ -27,7 +27,7 @@ services:
       args:
         - "UID=1000"
         - "GID=1000"
-        - "AKKOMA_VER=v3.4.0"
+        - "AKKOMA_VER=v3.10.2"
     volumes:
       - ./uploads:/uploads
       - ./static:/static
